@@ -55,6 +55,8 @@ class Matrix:
                 ratio = frac(str(self[j][i])) / frac(str(self[i][i]))
                 for k in range(i, len(self[j])):
                     self[j][k] -= ratio * self[i][k]
+        if out:
+            print(self, end='\n\n')
 
     def result(self):
         n, m = len(self), len(self[0])
@@ -75,6 +77,4 @@ class Matrix:
 
 if __name__ == '__main__':
     m = Matrix((Line(2,5,4,1,20),Line(1,3,2,1,4),Line(2,10,9,7,40),Line(3,8,9,2,37)))
-    m.solve()
-    print(m)
-    print(m.check(m.result()))
+    m.solve(out=True)
