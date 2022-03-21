@@ -20,7 +20,27 @@ class Line:
         return self.items[ind]
     def __setitem__(self, ind, key):
         self.items[ind] = key
-    __repr__ = __str__
+    def __mul__(self, other: int):
+        items = [0] * len(self)
+        for i in range(len(self)):
+            items[i] = self.items[i] * other
+        return Line(*items)
+    def __sub__(self, other):
+        items = [0] * len(self)
+        for i in range(len(self)):
+            items[i] = self.items[i] - other.items[i]
+        return Line(*items)
+    def __div__(self, other: int):
+        items = [0] * len(self)
+        for i in range(len(self)):
+            items[i] = self.items[i] / other
+        return Line(*items)
+    __floordiv__ = __div__
+    def __add__(self, other):
+        items = [0] * len(self)
+        for i in range(len(self)):
+            items[i] = self.items[i] + other.items[i]
+        return Line(*items)
 
 
 class Matrix:
@@ -78,3 +98,4 @@ class Matrix:
 if __name__ == '__main__':
     m = Matrix((Line(2,5,4,1,20),Line(1,3,2,1,4),Line(2,10,9,7,40),Line(3,8,9,2,37)))
     m.solve(out=True)
+    print(f"Result: {list(map(str, m.result()))}")
